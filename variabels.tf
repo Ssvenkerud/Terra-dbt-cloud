@@ -3,23 +3,4 @@ variable "dbt_cloud_projects" {
   default = ["demo"]
 }
 
-variable "dbt_cloud_redshift_conection" {
-  type = list(object({
-    name   = string
-    host   = string
-    dbname = string
-  }))
-  default = [
-    {
-      name    = demo_conection
-      host    = host_123
-      db_name = dwh
-    }
-  ]
-}
-
-variable "dbt_cloud_version" {
-  type    = string
-  default = "verionless"
-}
 
