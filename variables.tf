@@ -18,7 +18,7 @@ db_name = dwh
 ]
 }
 
-variable "dbt_cloud_verion"{
+variable "dbt_cloud_version"{
 type = string
 default = "verionless"
 }
