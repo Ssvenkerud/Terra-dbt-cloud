@@ -19,13 +19,44 @@ variable "dbt_cloud_redshift_connections" {
   }
   ]
 }
- 
-variable "dbt_cloud_redshift_prod_environment" {
+
+variable "dbt_cloud_version" {
+  type = string 
+ }
+variable "dbt_cloud_redshift_deployment_environment" {
+
+ type = list(object({
+    project = string
+    redshift_connection = string
+    name = string
+    type = string
+ })) 
+default = [
+{ 
+    project = "temp"
+    redshift_connection = "demo_connection"
+    name = "Prod"
+    type = "production"
+    }
+    { 
+    project = "temp"
+    redshift_connection = "demo_connection"
+    name = "Stage"
+    type = "stageing"
+    }
+    { 
+    project = "temp"
+    redshift_connection = "demo_connection"
+    name = "QA"
+    type = ""
+    }
+]
+}
+
+variable "dbt_cloud_redshift_dev_environment" {
  type = list(object({
     project = string
     redshift_connection = string
  })) 
 }
- variable "dbt_cloud_version" {
-  type = string 
- }
+
