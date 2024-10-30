@@ -26,3 +26,6 @@ variable "dbt_cloud_redshift_prod_environment" {
     redshift_connection = string
  })) 
 }
+ variable "dbt_cloud_version" {
+  type = string 
+ }
