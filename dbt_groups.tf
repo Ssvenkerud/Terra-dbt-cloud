@@ -20,7 +20,7 @@ resource "dbtcloud_group" "dbt_cloud_developer" {
 resource "dbtcloud_group" "dbt_cloud_read_only"{
   name = "Read only"
   group_permissions {
-    permission_set = "Read-Only"
+    permission_set = "readonly"
     all_projects   = true
   }
 }
