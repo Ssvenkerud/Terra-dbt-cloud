@@ -4,7 +4,7 @@ resource "dbtcloud_environment" "redshift_deployment_environment" {
  idx  =>  conn } 
   dbt_version     = var.dbt_cloud_version 
   name            = "${each.value.name}"
-  project_id      = dbtcloud_project.dbt_project[each.key].id
+  project_id      = dbtcloud_project.dbt_project[each.value.project].id
   type            = "deployment"
   deployment_type = "${each.value.type}"
   connection_id   = dbtcloud_global_connection.redshift_provisioned[each.value.redshift_connection].id
