@@ -20,3 +20,9 @@ variable "dbt_cloud_redshift_connections" {
   ]
 }
  
+variable "dbt_cloud_redshift_prod_environment" {
+ type = list(object({
+    project = string
+    redshift_connection = string
+ })) 
+}
