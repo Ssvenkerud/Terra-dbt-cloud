@@ -1,7 +1,7 @@
 // we can also set a deployment environment as being the production one
 resource "dbtcloud_environment" "redshift_deployment_environment" {
   for_each = { for conn in var.dbt_cloud_redshift_deployment_environment :
-  join("-", conn.project, conn.name) =>  conn } 
+ "${conn.project}"-"${conn.name}"  =>  conn } 
   dbt_version     = var.dbt_cloud_version 
   name            = "${each.value.name}"
   project_id      = dbtcloud_project.dbt_project[each.key].id
