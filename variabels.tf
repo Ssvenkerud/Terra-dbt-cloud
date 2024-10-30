@@ -37,13 +37,13 @@ default = [
     redshift_connection = "demo_connection"
     name = "Prod"
     type = "production"
-    }
+    },
     { 
     project = "temp"
     redshift_connection = "demo_connection"
     name = "Stage"
     type = "stageing"
-    }
+    },
     { 
     project = "temp"
     redshift_connection = "demo_connection"
