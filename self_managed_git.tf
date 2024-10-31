@@ -1,6 +1,6 @@
 ### repo cloned via the deploy token strategy
 resource "dbtcloud_repository" "dbt_repository" {
-  for_each = var.dbt_cloud_self_hosted_git
+for_each = { for repo in var.dbt_cloud_self_hosted_git : repo.project => repo } 
   project_id         = dbtcloud_project.dbt_project[each.value.project].id
   remote_url         = each.value.url
   git_clone_strategy = "deploy_key"
