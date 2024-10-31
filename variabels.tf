@@ -53,6 +53,13 @@ default = [
 ]
 }
 
+variable "dbt_cloud_self_hosted_git" {
+ type = list(object({
+  project = string
+  url = string
+ })) 
+}
+
 variable "dbt_cloud_redshift_dev_environment" {
  type = list(object({
     project = string
