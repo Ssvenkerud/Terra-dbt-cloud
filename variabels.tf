@@ -23,6 +23,10 @@ variable "dbt_cloud_redshift_connections" {
 variable "dbt_cloud_version" {
   type = string 
  }
+
+variable "dbt_prod_branch" {
+  type = string
+}
 variable "dbt_cloud_redshift_deployment_environment" {
 
  type = list(object({
