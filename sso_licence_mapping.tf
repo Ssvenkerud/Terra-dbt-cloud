@@ -17,6 +17,6 @@ resource "dbtcloud_partial_license_map" "it_licence" {
 
 resource "dbtcloud_partial_license_map" "read_only_licence" {
   count = var.dbt_cloud_admin_enabled ? 1 : 0
-  license_type = "readonly"
+  license_type = "read_only"
   sso_license_mapping_groups = ["Read only"]
 }
