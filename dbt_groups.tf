@@ -18,6 +18,7 @@ resource "dbtcloud_group" "dbt_cloud_developer" {
 }
 
 resource "dbtcloud_group" "dbt_cloud_read_only"{
+  count = var.dbt_cloud_admin_enabled ? 1 : 0
   name = "Read only"
   group_permissions {
     permission_set = "readonly"
@@ -26,6 +27,7 @@ resource "dbtcloud_group" "dbt_cloud_read_only"{
 }
 
 resource "dbtcloud_group" "dbt_cloud_admin"{
+  count = var.dbt_cloud_admin_enabled ? 1 : 0
   name = "Admin"
   group_permissions {
     permission_set = "account_admin"

@@ -2,6 +2,10 @@ variable "dbt_cloud_projects" {
   type    = list(string)
   default = ["demo"]
 }
+variable "dbt_cloud_admin_enabled" {
+  type = bool
+  default = false
+}
 
 variable "dbt_cloud_redshift_connections" {
     type = list(object({
