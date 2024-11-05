@@ -30,7 +30,7 @@ resource "dbtcloud_environment" "redshift_prod_environment" {
   type            = "deployment"
   deployment_type = "production"
   connection_id   = dbtcloud_global_connection.redshift_provisioned[each.value.redshift_connection].id
-  credential_id = dbtcloud_postgres_credential.redshift_prod_credential[each.key].id
+  credential_id = dbtcloud_postgres_credential.redshift_prod_credential.id
   use_custom_branch = true
   custom_branch = var.dbt_prod_branch
 }
