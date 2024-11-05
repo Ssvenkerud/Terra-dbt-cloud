@@ -19,11 +19,14 @@ resource "dbtcloud_global_connection" "redshift_provisioned" {
 }
 
 resource "dbtcloud_postgres_credential" "redshift_prod_credential" {
-  for_each = toset(var.dbt_cloud_projects)
+  for_each = { for conn in var.dbt_cloud_redshift_prod_environment :
+  conn.project =>
+  conn } 
   project_id     = dbtcloud_project.dbt_project[each.key].id
   type           = "redshift"
   default_schema = ""
   username       = var.dbt_cloud_redshift_prod_username
   password       = var.dbt_cloud_redshift_prod_password
   num_threads    = var.dbt_cloud_redshift_prod_threads
+
 }
