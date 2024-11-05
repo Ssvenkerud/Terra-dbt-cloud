@@ -80,3 +80,18 @@ variable "dbt_cloud_redshift_prod_environment" {
     redshift_connection = string
  })) 
 }
+
+variable "dbt_cloud_redshift_prod_username" {
+ type = string
+ sensitive = true
+}
+
+variable "dbt_cloud_redshift_prod_password" {
+ type = string 
+ sensitive = true
+}
+
+variable "dbt_cloud_redshift_prod_threads" {
+ type = number
+ default = 16
+}
