@@ -7,7 +7,7 @@ for_each = { for repo in var.dbt_cloud_self_hosted_git : repo.project => repo }
 }
 
 resource "dbtcloud_project_repository" "dbt_project_repository" {
-  for_each = toset(var.dbt_cloud_projects)
+  for_each = { for repo in var.dbt_cloud_self_hosted_git : repo.project => repo } 
   project_id    = dbtcloud_project.dbt_project[each.key].id
   repository_id = dbtcloud_repository.dbt_repository[each.key].repository_id
 }
