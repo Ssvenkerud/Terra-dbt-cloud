@@ -17,4 +17,9 @@ resource "dbtcloud_environment_variable" "dbt_schema_env_var" {
     "Dev" : "dev"
     "Prod" : "prod"
   }
+  depends_on = [
+  dbtcloud_environment.redshift_deployment_environment,
+  dbtcloud_environment.redshift_dev_environment,
+  dbtcloud_environment.redshift_prod_environment
+  ]
 }
