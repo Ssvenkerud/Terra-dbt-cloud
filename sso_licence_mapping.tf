@@ -7,6 +7,7 @@ locals {
 resource "dbtcloud_partial_license_map" "dev_license_map" {
   license_type               = "developer"
   sso_license_mapping_groups = concat(local.developer_licence,["App_Access_dbtCloud_Developer"])
+}
 
 resource "dbtcloud_partial_license_map" "it_licence" {
   count = var.dbt_cloud_admin_enabled ? 1 : 0
