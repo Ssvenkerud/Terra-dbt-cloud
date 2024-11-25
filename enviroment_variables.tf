@@ -5,7 +5,7 @@ resource "dbtcloud_environment_variable" "dbt_db_env_var" {
   environment_values = {
     "Project": null
     "Dev" : "dev"
-    "Prod" : ""
+    "Prod" : "prod"
   }
 }
 resource "dbtcloud_environment_variable" "dbt_schema_env_var" {
