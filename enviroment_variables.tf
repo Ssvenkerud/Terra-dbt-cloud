@@ -1,6 +1,6 @@
 resource "dbtcloud_environment_variable" "dbt_db_env_var" {
   for_each = toset(var.dbt_cloud_projects)
-  name       = "DBT_DB_VAR"
+  name       = "DBT_DB_ENV"
   project_id = dbtcloud_project.dbt_project[each.key].id
   environment_values = {
     "Project": null
