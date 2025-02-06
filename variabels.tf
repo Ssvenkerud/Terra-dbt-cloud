@@ -3,95 +3,122 @@ variable "dbt_cloud_projects" {
   default = ["demo"]
 }
 variable "dbt_cloud_admin_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "dbt_cloud_redshift_connections" {
-    type = list(object({
-        name = string
-        private_link_endpoint_id = string
-        hostname = string
-        dbname = string
+  type = list(object({
+    name                     = string
+    private_link_endpoint_id = string
+    hostname                 = string
+    dbname                   = string
   }))
   default = [
-  {
-    name = "demo_connection"
-    private_link_endpoint_id = "dummy_link"
-    hostname = "dummy host"
-    dbname = "dev"
-  }
+    {
+      name                     = "demo_connection"
+      private_link_endpoint_id = "dummy_link"
+      hostname                 = "dummy host"
+      dbname                   = "dev"
+    }
   ]
 }
 
+variable "dbt_cloud_snowflake_connections" {
+  type = list(object({
+    name                      = string
+    private_link_endpoint_id  = string
+    account                   = string
+    dbname                    = string
+    warehouse                 = string
+    role                      = string
+    client_session_keep_alive = bool
+  }))
+  default = [
+    {
+      name                     = "demo_connection"
+      private_link_endpoint_id = "dummy_link"
+      account                  = "dummy host"
+      dbname                   = "dev"
+    }
+  ]
+}
+
+variable "snowflake_oauth_client_id" {
+  type      = string
+  sensitive = true
+  ephemeral = true
+  default   = ""
+}
+
 variable "dbt_cloud_version" {
-  type = string 
- }
+  type = string
+}
 
 variable "dbt_prod_branch" {
   type = string
 }
 variable "dbt_cloud_redshift_deployment_environment" {
 
- type = list(object({
-    project = string
+  type = list(object({
+    project             = string
     redshift_connection = string
-    name = string
-    type = string
- })) 
-default = [
-{ 
-    project = "temp"
-    redshift_connection = "demo_connection"
-    name = "Prod"
-    type = "production"
+    name                = string
+    type                = string
+  }))
+  default = [
+    {
+      project             = "temp"
+      redshift_connection = "demo_connection"
+      name                = "Prod"
+      type                = "production"
     },
-    { 
-    project = "temp"
-    redshift_connection = "demo_connection"
-    name = "Stage"
-    type = "stageing"
+    {
+      project             = "temp"
+      redshift_connection = "demo_connection"
+      name                = "Stage"
+      type                = "stageing"
     },
-    { 
-    project = "temp"
-    redshift_connection = "demo_connection"
-    name = "QA"
-    type = ""
+    {
+      project             = "temp"
+      redshift_connection = "demo_connection"
+      name                = "QA"
+      type                = ""
     }
-]
+  ]
 }
 
 variable "dbt_cloud_self_hosted_git" {
- type = list(object({
-  project = string
-  url = string
- })) 
+  type = list(object({
+    project = string
+    url     = string
+  }))
 }
 
 variable "dbt_cloud_redshift_dev_environment" {
- type = list(object({
-    project = string
+  type = list(object({
+    project             = string
     redshift_connection = string
- })) 
+  }))
 }
 variable "dbt_cloud_redshift_prod_environment" {
- type = list(object({
-    project = string
+  type = list(object({
+    project             = string
     redshift_connection = string
- })) 
+  }))
 }
 
 variable "dbt_cloud_redshift_prod_username" {
- type = string
- sensitive = true
+  type      = string
+  sensitive = true
 }
 
 variable "dbt_cloud_redshift_prod_password" {
- type = string 
- sensitive = true
+  type      = string
+  sensitive = true
 }
 
 variable "dbt_cloud_redshift_prod_threads" {
- type = number
- default = 16
+  type    = number
+  default = 16
 }
