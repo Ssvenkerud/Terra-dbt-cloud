@@ -59,6 +59,6 @@ resource "dbtcloud_environment" "snowflake_dev_environment" {
   name          = "Dev"
   project_id    = dbtcloud_project.dbt_project[each.key].id
   type          = "development"
-  connection_id = dbtcloud_global_connection.snowflake[each.value.redshift_connection].id
+  connection_id = dbtcloud_global_connection.snowflake[each.value.snowflake_connection].id
   depends_on    = [dbtcloud_global_connection.snowflake]
 }
