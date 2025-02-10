@@ -6,7 +6,7 @@ resource "dbtcloud_global_connection" "snowflake" {
     account   = each.value.account
     database  = each.value.dbname
     warehouse = each.value.warehouse
-    role      = each.vlaue.role
+    role      = each.value.role
 
     client_session_keep_alive = each.value.client_session_keep_alive
     allow_sso                 = true
