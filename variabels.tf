@@ -53,14 +53,12 @@ variable "snowflake_oauth_client_id" {
   description = "In order to enable SSO between DBT and snowflake, this variables is used to stor the Client ID. This variable is only needed when dbt_cloud_admin_enabled is set to ture"
   type        = string
   sensitive   = true
-  ephemeral   = true
   default     = ""
 }
 variable "snowflake_oauth_client_secret" {
   description = "In order to enable SSO between DBT and snowflake, this variables is used to stor the Client ID. This variable is only needed when dbt_cloud_admin_enabled is set to ture"
   type        = string
   sensitive   = true
-  ephemeral   = true
   default     = ""
 }
 
