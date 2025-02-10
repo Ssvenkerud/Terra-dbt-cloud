@@ -101,6 +101,23 @@ variable "dbt_cloud_redshift_deployment_environment" {
   ]
 }
 
+variable "dbt_cloud_snowflake_deployment_environment" {
+  description = "In the case that one neds additional redshift based  envrioments other than DEV and PROD, this variable is used to create and link them"
+  type = list(object({
+    project              = string
+    snowflake_connection = string
+    name                 = string
+    type                 = string
+  }))
+  default = [
+    {
+      project              = "temp"
+      snowflake_connection = "demo_connection"
+      name                 = "Prod"
+      type                 = "production"
+    }
+  ]
+}
 variable "dbt_cloud_self_hosted_git" {
   type = list(object({
     project = string
