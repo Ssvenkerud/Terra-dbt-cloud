@@ -35,7 +35,7 @@ This section covers the prerecuisites, and steps needed to set up the module.
 7. Run terraform apply
 8. Terraform setup compleeted
 
-#### Adding additional projects
+#### Adding additional states/teams 
 In the case that you want to add aditional projects to the setup follow the steps below. 
 Before starting however please note that the degree to which you need to create seperation depends on your terraform setup.
 
