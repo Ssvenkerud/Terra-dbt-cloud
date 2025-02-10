@@ -1,12 +1,12 @@
 variable "dbt_cloud_projects" {
-  description = """Holds a list of strings, containing all the DBT Cloud projects assosiated with this state. To create additional projects, all one needs to do, is at the project to the list. Note that names here are case sensitive."""
-  type    = list(string)
-  default = ["demo"]
+  description = "Holds a list of strings, containing all the DBT Cloud projects assosiated with this state. To create additional projects, all one needs to do, is at the project to the list. Note that names here are case sensitive."
+  type        = list(string)
+  default     = ["demo"]
 }
 variable "dbt_cloud_admin_enabled" {
   description = "Every DBT Cloud instance need certain defaul troles, and access created, and mapped. One state within a given DBT cloud instance needs to have this option enabled, to create admin related resources."
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "dbt_cloud_redshift_connections" {
@@ -27,7 +27,7 @@ variable "dbt_cloud_redshift_connections" {
   ]
 }
 
-variable "dbt_cloud_snowflake_connections" {
+variable "dbt_cloud_snowflake_connections_sso" {
   description = "stores the variables used for creating Snowflake conections."
   type = list(object({
     name                      = string
@@ -39,11 +39,11 @@ variable "dbt_cloud_snowflake_connections" {
   }))
   default = [
     {
-      name                     = "demo_connection"
-      account                  = "dummy host"
-      dbname                   = "dev"
-      warehouse = "dummy"
-      role = "dumm_role"
+      name                      = "demo_connection"
+      account                   = "dummy host"
+      dbname                    = "dev"
+      warehouse                 = "dummy"
+      role                      = "dumm_role"
       client_session_keep_alive = false
     }
   ]
@@ -51,23 +51,30 @@ variable "dbt_cloud_snowflake_connections" {
 
 variable "snowflake_oauth_client_id" {
   description = "In order to enable SSO between DBT and snowflake, this variables is used to stor the Client ID. This variable is only needed when dbt_cloud_admin_enabled is set to ture"
-  type      = string
-  sensitive = true
-  ephemeral = true
-  default   = ""
+  type        = string
+  sensitive   = true
+  ephemeral   = true
+  default     = ""
+}
+variable "snowflake_oauth_client_secret" {
+  description = "In order to enable SSO between DBT and snowflake, this variables is used to stor the Client ID. This variable is only needed when dbt_cloud_admin_enabled is set to ture"
+  type        = string
+  sensitive   = true
+  ephemeral   = true
+  default     = ""
 }
 
 variable "dbt_cloud_version" {
   description = "DBT Cloud now supports the use of release track. Use this variabel to set the releace track that you want to follow. It is only possible to have one setup per state. For teams/projects witb higher/lowe risk tolerance, create seperate states."
-  type = string
+  type        = string
 }
 
 variable "dbt_prod_branch" {
   description = "set the name that your production branch has in git. This will be the branch that is checked out by dbt cloud when running jobs in the Production setting."
-  type = string
+  type        = string
 }
 variable "dbt_cloud_redshift_deployment_environment" {
- description = "In the case that one neds additional redshift based  envrioments other than DEV and PROD, this variable is used to create and link them" 
+  description = "In the case that one neds additional redshift based  envrioments other than DEV and PROD, this variable is used to create and link them"
   type = list(object({
     project             = string
     redshift_connection = string
@@ -120,18 +127,18 @@ variable "dbt_cloud_redshift_prod_environment" {
 
 variable "dbt_cloud_redshift_prod_username" {
   description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
-  type      = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
 
 variable "dbt_cloud_redshift_prod_password" {
-   description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
-  type      = string
-  sensitive = true
+  description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
+  type        = string
+  sensitive   = true
 }
 
 variable "dbt_cloud_redshift_prod_threads" {
   description = "The number of threds a production enviroment should use in REdshift."
-  type    = number
-  default = 16
+  type        = number
+  default     = 16
 }
