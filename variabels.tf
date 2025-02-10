@@ -118,6 +118,15 @@ variable "dbt_cloud_snowflake_deployment_environment" {
     }
   ]
 }
+
+variable "dbt_cloud_snowflake_dev_environment" {
+  description = "This variable creates the link between which project, should use what connection as its production connection. Teher is only one production enviroment per project in dbt cloud, there for this can be a simmpe mapping list"
+  type = list(object({
+    project              = string
+    snowflake_connection = string
+  }))
+}
+
 variable "dbt_cloud_self_hosted_git" {
   type = list(object({
     project = string
