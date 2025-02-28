@@ -1,0 +1,61 @@
+dbt_cloud_version       = "latest"
+dbt_prod_branch         = "main"
+dbt_cloud_admin_enabled = true
+
+dbt_cloud_projects = ["project_name"]
+
+dbt_cloud_redshift_connections = [{
+  name                     = "Connection-name"
+  private_link_endpoint_id = "endpoint id"
+  hostname                 = "redshift hostname"
+  dbname                   = "db"
+  }
+]
+
+dbt_cloud_redshift_dev_environment = [
+
+  {
+    project             = "project_name"
+    redshift_connection = "Connection-name"
+  }
+]
+dbt_cloud_redshift_prod_environment = [
+  {
+    project             = "project_name"
+    redshift_connection = "Connection-name"
+  }
+]
+
+dbt_cloud_redshift_deployment_environment = []
+
+
+dbt_cloud_snowflake_connections_sso = [{
+  name                      = "connection_name"
+  account                   = "locator.region"
+  dbname                    = "bbname"
+  warehouse                 = "warehouse"
+  role                      = "role"
+  client_session_keep_alive = false
+}]
+dbt_cloud_snowflake_deployment_environment = [
+  {
+    project              = "project_name"
+    snowflake_connection = "connection_name"
+    name                 = "enviroment-name"
+    type                 = "staging"
+  }
+]
+
+dbt_cloud_snowflake_prod_environment = [
+  {
+    project              = "project_name"
+    snowflake_connection = "connection_name"
+  }
+]
+
+dbt_cloud_snowflake_dev_environment = [
+  {
+    project              = "project_name"
+    snowflake_connection = "connection_name"
+  }
+]
