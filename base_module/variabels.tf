@@ -19,4 +19,67 @@ variable "dbt_prod_branch" {
   description = "set the name that your production branch has in git. This will be the branch that is checked out by dbt cloud when running jobs in the Production setting."
   type        = string
 }
+variable "dbt_cloud_snowflake_connections_sso" {
+  description = "stores the variables used for creating Snowflake conections."
+  type = list(object({
+    name                      = string
+    account                   = string
+    dbname                    = string
+    warehouse                 = string
+    role                      = string
+    client_session_keep_alive = bool
+  }))
+  default = []
+}
+
+variable "snowflake_oauth_client_id" {
+  description = "In order to enable SSO between DBT and snowflake, this variables is used to stor the Client ID. This variable is only needed when dbt_cloud_admin_enabled is set to ture"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+variable "snowflake_oauth_client_secret" {
+  description = "In order to enable SSO between DBT and snowflake, this variables is used to stor the Client ID. This variable is only needed when dbt_cloud_admin_enabled is set to ture"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "dbt_cloud_snowflake_deployment_environment" {
+  description = "In the case that one neds additional redshift based  envrioments other than DEV and PROD, this variable is used to create and link them"
+  type = list(object({
+    project              = string
+    snowflake_connection = string
+    name                 = string
+    type                 = string
+  }))
+  default = [
+    {
+      project              = "temp"
+      snowflake_connection = "demo_connection"
+      name                 = "Prod"
+      type                 = "production"
+    }
+  ]
+}
+
+variable "dbt_cloud_snowflake_dev_environment" {
+  description = "This variable maps what connection a prodject should use for its production environment. Development is a special enviroment in DBT cloud and there can only ever be one. Therefror this is a simple mapping list."
+  type = list(object({
+    project              = string
+    snowflake_connection = string
+  }))
+  default = []
+}
+
+variable "dbt_cloud_snowflake_prod_environment" {
+  description = "This variable creates the link between which project, should use what connection as its production connection. Teher is only one production enviroment per project in dbt cloud, there for this can be a simmpe mapping list"
+
+  type = list(object({
+    project              = string
+    snowflake_connection = string
+  }))
+  default = []
+}
+
 
