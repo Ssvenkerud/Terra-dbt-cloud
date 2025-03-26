@@ -19,7 +19,21 @@ variable "dbt_prod_branch" {
   description = "set the name that your production branch has in git. This will be the branch that is checked out by dbt cloud when running jobs in the Production setting."
   type        = string
 }
+
 variable "dbt_cloud_snowflake_connections_sso" {
+  description = "stores the variables used for creating Snowflake conections."
+  type = list(object({
+    name                      = string
+    account                   = string
+    dbname                    = string
+    warehouse                 = string
+    role                      = string
+    client_session_keep_alive = bool
+  }))
+  default = []
+}
+
+variable "dbt_cloud_snowflake_connections_non_sso" {
   description = "stores the variables used for creating Snowflake conections."
   type = list(object({
     name                      = string
@@ -82,4 +96,14 @@ variable "dbt_cloud_snowflake_prod_environment" {
   default = []
 }
 
+variable "dbt_cloud_snowflake_prod_username" {
+  description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
+  type        = string
+  sensitive   = true
+}
 
+variable "dbt_cloud_snowflake_prod_private_key" {
+  description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
+  type        = string
+  sensitive   = true
+}
