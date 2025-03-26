@@ -11,7 +11,7 @@ resource "dbtcloud_environment" "snowflake_prod_environment" {
   connection_id     = dbtcloud_global_connection.snowflake_non_sso[each.value.snowflake_connection].id
   use_custom_branch = true
   custom_branch     = var.dbt_prod_branch
-  depends_on        = [dbtcloud_global_connection.snowflake]
+  depends_on        = [dbtcloud_global_connection.snowflake_non_sso]
 }
 
 
