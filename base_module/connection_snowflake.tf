@@ -33,7 +33,7 @@ resource "dbtcloud_snowflake_credential" "snowflake_pk_creds" {
   auth_type   = "keypair"
   num_threads = "16"
   schema      = ""
-  user        = var.snowflake_prod_username
-  private_key = var.snowflake_prod_private_key
+  user        = var.dbt_cloud_snowflake_prod_username
+  private_key = var.dbt_cloud_snowflake_prod_private_key
 
 }
