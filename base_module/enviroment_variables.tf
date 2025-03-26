@@ -3,7 +3,6 @@ resource "dbtcloud_environment_variable" "dbt_db_env_var_snowflake" {
   name       = "DBT_DB_ENV"
   project_id = dbtcloud_project.dbt_project[each.key].id
   environment_values = {
-    "Project" : "config_error"
     "Dev" : "dev"
     "Prod" : "prod"
   }
@@ -18,7 +17,6 @@ resource "dbtcloud_environment_variable" "dbt_schema_env_var_snowflake" {
   name       = "DBT_SCHEMA_ENV"
   project_id = dbtcloud_project.dbt_project[each.key].id
   environment_values = {
-    "project" : "config_error"
     "Dev" : "dev"
     "Prod" : "prod"
   }
