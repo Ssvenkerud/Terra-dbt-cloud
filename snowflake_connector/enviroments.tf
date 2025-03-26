@@ -8,7 +8,7 @@ resource "dbtcloud_environment" "snowflake_prod_environment" {
   project_id        = dbtcloud_project.dbt_project[each.key].id
   type              = "deployment"
   deployment_type   = "production"
-  connection_id     = dbtcloud_global_connection.snowflake[each.value.snowflake_connection].id
+  connection_id     = dbtcloud_global_connection.snowflake[each.value.snowflake_connection_non_sso].id
   use_custom_branch = true
   custom_branch     = var.dbt_prod_branch
   depends_on        = [dbtcloud_global_connection.snowflake]
