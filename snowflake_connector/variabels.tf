@@ -3,14 +3,20 @@ variable "dbt_cloud_projects" {
   type        = list(string)
   default     = ["demo"]
 }
-
-variable "dbt_prod_branch" {
-  description = "set the name that your production branch has in git. This will be the branch that is checked out by dbt cloud when running jobs in the Production setting."
-  type        = string
+variable "dbt_cloud_admin_enabled" {
+  description = "Every DBT Cloud instance need certain defaul troles, and access created, and mapped. One state within a given DBT cloud instance needs to have this option enabled, to create admin related resources."
+  type        = bool
+  default     = false
 }
+
 
 variable "dbt_cloud_version" {
   description = "DBT Cloud now supports the use of release track. Use this variabel to set the releace track that you want to follow. It is only possible to have one setup per state. For teams/projects witb higher/lowe risk tolerance, create seperate states."
+  type        = string
+}
+
+variable "dbt_prod_branch" {
+  description = "set the name that your production branch has in git. This will be the branch that is checked out by dbt cloud when running jobs in the Production setting."
   type        = string
 }
 
@@ -24,16 +30,20 @@ variable "dbt_cloud_snowflake_connections_sso" {
     role                      = string
     client_session_keep_alive = bool
   }))
-  default = [
-    {
-      name                      = "demo_connection"
-      account                   = "dummy host"
-      dbname                    = "dev"
-      warehouse                 = "dummy"
-      role                      = "dumm_role"
-      client_session_keep_alive = false
-    }
-  ]
+  default = []
+}
+
+variable "dbt_cloud_snowflake_connections_non_sso" {
+  description = "stores the variables used for creating Snowflake conections."
+  type = list(object({
+    name                      = string
+    account                   = string
+    dbname                    = string
+    warehouse                 = string
+    role                      = string
+    client_session_keep_alive = bool
+  }))
+  default = []
 }
 
 variable "snowflake_oauth_client_id" {
@@ -73,6 +83,7 @@ variable "dbt_cloud_snowflake_dev_environment" {
     project              = string
     snowflake_connection = string
   }))
+  default = []
 }
 
 variable "dbt_cloud_snowflake_prod_environment" {
@@ -82,5 +93,19 @@ variable "dbt_cloud_snowflake_prod_environment" {
     project              = string
     snowflake_connection = string
   }))
+  default = []
 }
+
+variable "dbt_cloud_snowflake_prod_username" {
+  description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
+  type        = string
+  sensitive   = true
+}
+
+variable "dbt_cloud_snowflake_prod_private_key" {
+  description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
+  type        = string
+  sensitive   = true
+}
+
 
