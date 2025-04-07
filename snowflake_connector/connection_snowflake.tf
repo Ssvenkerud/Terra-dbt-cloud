@@ -28,12 +28,11 @@ resource "dbtcloud_global_connection" "snowflake_non_sso" {
 }
 
 resource "dbtcloud_snowflake_credential" "snowflake_pk_creds" {
-  for_each    = { for conn in var.dbt_cloud_snowflake_prod_environment : conn.project => conn }
-  project_id  = dbtcloud_project.dbt_project[each.key].id
+  for_each    = { for conn in var.snowflake_pk_creds : conn.snowflake_connection => conn }
+  project_id  = dbtcloud_project.dbt_project[each.value.project].id
   auth_type   = "keypair"
   num_threads = "16"
   schema      = ""
-  user        = var.dbt_cloud_snowflake_prod_username
-  private_key = var.dbt_cloud_snowflake_prod_private_key
-
+  user        = each.value.username
+  private_key = each.value.private_key
 }

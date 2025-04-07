@@ -8,7 +8,7 @@ resource "dbtcloud_environment" "snowflake_prod_environment" {
   project_id        = dbtcloud_project.dbt_project[each.key].id
   type              = "deployment"
   deployment_type   = "production"
-  credential_id     = dbtcloud_snowflake_credential.snowflake_pk_creds[each.value.name]
+  credential_id     = dbtcloud_snowflake_credential.snowflake_pk_creds[each.value.snowflake_connection].id
   connection_id     = dbtcloud_global_connection.snowflake_non_sso[each.value.snowflake_connection].id
   use_custom_branch = true
   custom_branch     = var.dbt_prod_branch
@@ -26,6 +26,7 @@ resource "dbtcloud_environment" "snowflake_deployment_environment" {
   type            = "deployment"
   deployment_type = each.value.type
   connection_id   = dbtcloud_global_connection.snowflake_non_sso[each.value.snowflake_connection].id
+  credential_id   = dbtcloud_snowflake_credential.snowflake_pk_creds[each.value.snowflake_connection].id
   depends_on      = [dbtcloud_global_connection.snowflake_non_sso]
 }
 

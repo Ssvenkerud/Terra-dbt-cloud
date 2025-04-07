@@ -42,6 +42,18 @@ variable "dbt_cloud_snowflake_connections_non_sso" {
     warehouse                 = string
     role                      = string
     client_session_keep_alive = bool
+    project                   = string
+  }))
+  default = []
+}
+variable "snowflake_pk_creds" {
+  description = "Varible for the creation of key Pair credentials in to connect to snowflake"
+  sensitive   = true
+  type = list(object({
+    snowflake_connection = string
+    project              = string
+    username             = string
+    private_key          = string
   }))
   default = []
 }
@@ -60,7 +72,7 @@ variable "snowflake_oauth_client_secret" {
 }
 
 variable "dbt_cloud_snowflake_deployment_environment" {
-  description = "In the case that one neds additional redshift based  envrioments other than DEV and PROD, this variable is used to create and link them"
+  description = "In the case that one neds additional Snowflake  based  envrioments other than DEV and PROD, this variable is used to create and link them"
   type = list(object({
     project              = string
     snowflake_connection = string
@@ -96,16 +108,6 @@ variable "dbt_cloud_snowflake_prod_environment" {
   default = []
 }
 
-variable "dbt_cloud_snowflake_prod_username" {
-  description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
-  type        = string
-  sensitive   = true
-}
 
-variable "dbt_cloud_snowflake_prod_private_key" {
-  description = "As DBT cloud currently only supports the use of username and password to redshift users, this variable must be set to provide credentials for production enviroments. It is however recomended etting it av an env variable, rather than as a set variabel"
-  type        = string
-  sensitive   = true
-}
 
 
