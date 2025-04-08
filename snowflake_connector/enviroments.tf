@@ -12,7 +12,9 @@ resource "dbtcloud_environment" "snowflake_prod_environment" {
   connection_id     = dbtcloud_global_connection.snowflake_non_sso[each.value.snowflake_connection].id
   use_custom_branch = true
   custom_branch     = var.dbt_prod_branch
-  depends_on        = [dbtcloud_global_connection.snowflake_non_sso]
+  depends_on = [dbtcloud_global_connection.snowflake_non_sso,
+    dbtcloud_snowflake_credential.snowflake_pk_creds
+  ]
 }
 
 
@@ -27,7 +29,9 @@ resource "dbtcloud_environment" "snowflake_deployment_environment" {
   deployment_type = each.value.type
   connection_id   = dbtcloud_global_connection.snowflake_non_sso[each.value.snowflake_connection].id
   credential_id   = dbtcloud_snowflake_credential.snowflake_pk_creds[each.value.snowflake_connection].id
-  depends_on      = [dbtcloud_global_connection.snowflake_non_sso]
+  depends_on = [dbtcloud_global_connection.snowflake_non_sso,
+    dbtcloud_snowflake_credential.snowflake_pk_creds
+  ]
 }
 
 
