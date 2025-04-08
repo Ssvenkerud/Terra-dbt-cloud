@@ -42,13 +42,11 @@ variable "dbt_cloud_snowflake_connections_non_sso" {
     warehouse                 = string
     role                      = string
     client_session_keep_alive = bool
-    project                   = string
   }))
   default = []
 }
 variable "snowflake_pk_creds" {
   description = "Varible for the creation of key Pair credentials in to connect to snowflake"
-  sensitive   = true
   type = list(object({
     snowflake_connection = string
     project              = string
