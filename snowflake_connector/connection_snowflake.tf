@@ -34,5 +34,5 @@ resource "dbtcloud_snowflake_credential" "snowflake_pk_creds" {
   num_threads = "16"
   schema      = ""
   user        = each.value.username
-  private_key = each.value.private_key
+  private_key = base64decode(each.value.private_key)
 }
