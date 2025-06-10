@@ -56,6 +56,16 @@ variable "snowflake_pk_creds" {
   default = []
 }
 
+
+variable "snowflake_manual_creds" {
+  description = "Varible for the creation of key Pair credentials in to connect to snowflake"
+  type = list(object({
+    snowflake_connection = string
+    project              = string
+    username             = string
+  }))
+  default = []
+}
 variable "snowflake_oauth_client_id" {
   description = "In order to enable SSO between DBT and snowflake, this variables is used to stor the Client ID. This variable is only needed when dbt_cloud_admin_enabled is set to ture"
   type        = string

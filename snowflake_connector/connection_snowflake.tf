@@ -36,3 +36,12 @@ resource "dbtcloud_snowflake_credential" "snowflake_pk_creds" {
   user        = each.value.username
   private_key = base64decode(each.value.private_key)
 }
+
+resource "dbtcloud_snowflake_credential" "snowflake_man_creds" {
+  for_each    = { for conn in var.snowflake_manual_creds : conn.snowflake_connection => conn }
+  project_id  = dbtcloud_project.dbt_project[each.value.project].id
+  auth_type   = "keypair"
+  num_threads = "16"
+  schema      = ""
+  user        = each.value.username
+}
