@@ -4,7 +4,7 @@ resource "dbtcloud_environment" "snowflake_prod_environment" {
     conn.project =>
   conn }
   dbt_version       = var.dbt_cloud_version
-  name              = "Prod"
+  name              = "prod"
   project_id        = dbtcloud_project.dbt_project[each.key].id
   type              = "deployment"
   deployment_type   = "production"
@@ -22,7 +22,7 @@ resource "dbtcloud_environment" "snowflake_manual_prod_environment" {
     conn.project =>
   conn }
   dbt_version       = var.dbt_cloud_version
-  name              = "Prod"
+  name              = "prod"
   project_id        = dbtcloud_project.dbt_project[each.key].id
   type              = "deployment"
   deployment_type   = "production"
