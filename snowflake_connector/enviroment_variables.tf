@@ -10,7 +10,6 @@ resource "dbtcloud_environment_variable" "dbt_db_env_var" {
   depends_on = [
     dbtcloud_environment.snowflake_deployment_environment,
     dbtcloud_environment.snowflake_dev_environment,
-    dbtcloud_environment.snowflake_prod_environment
   ]
 
 }
@@ -27,6 +26,5 @@ resource "dbtcloud_environment_variable" "dbt_schema_env_var" {
   depends_on = [
     dbtcloud_environment.snowflake_deployment_environment,
     dbtcloud_environment.snowflake_dev_environment,
-    dbtcloud_environment.snowflake_prod_environment
   ]
 }
